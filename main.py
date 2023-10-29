@@ -18,7 +18,7 @@ def _create_closing_events(trace, at):
     return events
 
 
-query_id = "188f5370-be1c-4356-b659-efb81c54841d"
+query_id = "3b0e49fd-07c2-446f-a0e0-60c59a079e19"
 sample_period_ms = 100
 ds_adaptor = ClickHouseTraceLogAdaptor(
     query_id=query_id, host="localhost", port=9000, user="default", pwd=""

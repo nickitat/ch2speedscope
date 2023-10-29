@@ -1,5 +1,6 @@
 from typing import List, NamedTuple, Tuple
 
+
 """
 This class provides all the data required to build an event-based profile for SpeedScope.
 It is less abstract that the format itself, but seemingly is still general enough for all trace types supported by ClickHouse.
@@ -58,7 +59,8 @@ class IDataSourceAdaptor(object):
     The whole file can contain multiple profiles - each for it's own thread.
     Each thread can have an id and a name. The resulting profile will have the name matching the thread name.
     The `get_events` method will be called for each pair and passed in arguments.
-    Returns list of pairs (thread id, thread name) """
+    Returns list of pairs (thread id, thread name)
+    """
 
     def get_threads(self) -> List[Tuple[int | str, int | str]]:
         raise NotImplementedError
