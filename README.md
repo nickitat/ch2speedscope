@@ -42,6 +42,19 @@ And merging happening after this:
 
 ![merging](./examples/trace_log_aggregation_profile_merging.png)
 
+---
+
+Usage:
+
+``` sh
+./trace_log.py -h
+```
+
+Example command:
+
+``` sh
+./trace_log.py -q '<query_id>' --host '<hostname>' --port 9440 --password '<pwd>' --secure --on_cluster default --trace_type 'Real' 'CPU' > profile.json
+```
 
 ## `system.opentelemetry_span_log`
 
