@@ -11,12 +11,14 @@ You could find the spec here: https://github.com/jlfwong/speedscope/blob/main/sr
 class IDataSourceAdaptor(object):
     Event = NamedTuple("Event", [("trace", int), ("at", int)])
 
-    def __init__(self, query_id, host, port, user, pwd):
+    def __init__(self, query_id, host, port, user, pwd, secure, on_cluster):
         self.query_id = query_id
         self.host = host
         self.port = port
         self.user = user
         self.pwd = pwd
+        self.secure = secure
+        self.on_cluster = on_cluster
 
     """
     Returns the unit in which startValue and endValue are measured
