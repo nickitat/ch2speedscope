@@ -42,12 +42,6 @@ And merging happening after this:
 
 ![merging](./examples/trace_log_aggregation_profile_merging.png)
 
-## `system.processors_profile_log`
-
-[`processors_profile_log`](https://clickhouse.com/docs/en/operations/system-tables/processors_profile_log) documentation.
-
-TODO: implement support.
-
 
 ## `system.opentelemetry_span_log`
 
