@@ -24,6 +24,9 @@ class ClickHouseTraceLogAdaptor(IDataSourceAdaptor):
         self.trace_types = trace_types
         self.sample_period = sample_period
 
+        self._check_revision()
+        self._flush_logs()
+
     def get_value_unit(self) -> str:
         return "milliseconds"
 
@@ -89,6 +92,22 @@ class ClickHouseTraceLogAdaptor(IDataSourceAdaptor):
          WHERE query_id LIKE '{self.query_id}' AND type = 'QueryStart'
         """
         return ast.literal_eval(self._run_query(query))
+
+    def _check_revision(self):
+        query_revision = self._run_query(f"""
+        SELECT revision
+          FROM {self._table('system.query_log')}
+         WHERE query_id LIKE '{self.query_id}' AND type = 'QueryStart'
+        """)
+        current_revision = self._run_query("SELECT revision()")
+        assert query_revision == current_revision, "current ClickHouse revision is different from the revision at query time, demangled stacks will be wrong"
+
+    def _flush_logs(self):
+        if not self.on_cluster:
+            query = "SYSTEM FLUSH LOGS"
+        else:
+            query = f"SYSTEM FLUSH LOGS ON CLUSTER {self.on_cluster}"
+        self._run_query(query)
 
     def _run_query(self, query):
         params = [
